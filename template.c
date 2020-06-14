@@ -4,12 +4,6 @@
 #define MAX 10010
 #define MAX_INT 9223372036854775807
 
-void debug(char * string, long long int target) {
-  printf("%s", string);
-  printf("%lld", target);
-  printf("%c", '\n');
-}
-
 int main() {
   return 0;
 }

@@ -5,15 +5,6 @@
 #define rep(i, n) for(int i=0; i<(n); ++i)
 #define max 288199999999999999
 
-void debug(char * string, long int target) {
-  printf("%s", string);
-  printf("%ld", target);
-  printf("%c", '\n');
-}
-
-void dfs(long * N, long * z, long * j) {
-}
-
 int main() {
   long N;
   scanf("%ld", &N);
