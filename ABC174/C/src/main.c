@@ -10,19 +10,16 @@ int main() {
   int K;
   scanf("%d", &K);
 
-  if (K % 2 == 0) {
-    printf("-1\n");
-    return 0;
+  int mod_K = 7 % K;
+
+  for (int i = 1; i <= K; i += 1) {
+    if (mod_K == 0) {
+      printf("%d\n", i);
+      return 0;
+    }
+    mod_K = ((mod_K * 10) + 7) % K;
   }
 
-  long long i = 0;
-  long long int seven = 7;
-  long long int seven_plus = 7;
-  while(seven % K != 0) {
-    i += 1;
-    seven = seven + (seven_plus * (i * 10)); // 7 + 70 = 77, 77 + 700 = 777
-    printf("seven: %lld\n", seven);
-    printf("i: %lld\n", i);
-  }
+  printf("-1\n");
   return 0;
 }
