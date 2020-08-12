@@ -15,23 +15,8 @@ int main() {
     scanf("%d", A + i);
   }
 
-  long long int * S = array(N - K, long long int);
-  for (int i = 0; i <= N - K; i += 1) {
-    S[i] = 1;
-    rep(j, K) {
-      // printf("j: %d\n", j);
-      // printf("A[j]: %d\n", A[j]);
-      S[i] *= A[j + i];
-    }
-  }
-
-  /* rep(i, K) { */
-  /*   printf("i: %d\n", i); */
-  /*   printf("S[i]: %lld\n", S[i]); */
-  /* } */
-
   rep(i, N - K) {
-    if (S[i + 1] > S[i]) {
+    if (A[i + K] > A[i]) {
       printf("Yes\n");
     } else {
       printf("No\n");
@@ -39,6 +24,5 @@ int main() {
   }
 
   free(A);
-  free(S);
   return 0;
 }
