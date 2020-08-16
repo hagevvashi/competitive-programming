@@ -10,22 +10,27 @@ int main() {
   long long X, K, D;
   scanf("%lld%lld%lld", &X, &K, &D);
 
-  // FIXME: X > 0 が前提。X <= 0 のケースはまた後で
-  long long s = labs(X) / D;
-  // FIXME: K > s が前提。K <= s のケースはまた後で
-  long long t = labs(K - s);
-
+  X = labs(X);
   long long ans = 0;
 
-  if (t % 2 != 0) {
-    long long u = (long long int)(X % D);
-    if (u < D) {
-      ans = labs(u - D);
-    } else {
-      ans = D - u;
-    }
+  // 繰り返しを行わない判定
+  // X - (K * D) >= 0
+  // X >= (K * D)
+  // X / D >= K
+  if (X / D >= K) {
+    // X - (K * D) >= 0 なので overflow は心配しなくて良い
+    ans = X - (K * D);
   } else {
-    ans = X % D;
+    // X / D は繰り返すまでの操作回数
+    // X / D 回 D ずつ操作した数が、繰り返し直前までの差分
+    // その差分を X から引くことで、繰り返し直前の値がわかる
+    ans = X - ((X / D) * D);
+    // 繰り返すまでの操作回数を K から引いた残りの数について
+    // 偶数なら、繰り返すだけなので答えはそのまま
+    // 奇数なら、|繰り返し直前の値 - D| だけ原点から離れる
+    if ((K - (X / D)) % 2 == 1) {
+      ans = labs(ans - D);
+    }
   }
 
   printf("%lld\n", ans);
