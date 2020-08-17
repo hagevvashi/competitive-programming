@@ -7,5 +7,15 @@
 #define array(N, t) (t*)calloc(N, sizeof(t))
 
 int main() {
+  int N, K;
+  scanf("%d%d", &N, &K);
+  int * P = array(N, int);
+  int * C = array(N, int);
+
+  long long int ans = 0;
+  printf("%lld\n", ans);
+
+  free(P);
+  free(C);
   return 0;
 }
