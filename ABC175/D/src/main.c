@@ -4,15 +4,19 @@
 #define rep(i, n) for (int i = 0; i < n; i = i + 1)
 #define array(N, t) (t*)calloc(N, sizeof(t))
 #define ll long long
-#define INF ((1LL<<62)-(1LL<<31))
-#define max(p,q)((p)>(q)?(p):(q))
-#define min(p,q)((p)<(q)?(p):(q))
+#define INF ((1LL << 62) - (1LL << 31))
+#define max(p, q)((p) > (q) ? (p) : (q))
+#define min(p, q)((p) < (q) ? (p) : (q))
 
 int main() {
   int N, K;
   scanf("%d%d", &N, &K);
   int * P = array(N, int);
   int * C = array(N, int);
+  rep(i, N) {
+    scanf("%d", P + i);
+    scanf("%d", C + i);
+  }
   // 入力は1から始まるが配列indexは0から始まるため、-1しておく
   rep(i, N) {
     P[i] -= 1;
@@ -51,24 +55,27 @@ int main() {
 
     // 周期の長さ
     int period_length = score_index + 1;
-    // 今までの累積和
-    // あるところで切った時の累積
-    ll now = 0;
+
+    ll t = 0;
     // scoreの配列のどこで切るのかというのを試す
     // period_length 箇所の内どこで切る？
     rep(i, period_length) {
-      now += score_array[i];
+      t += score_array[i];
       // Kが1の時に2の場所で区切ることはできないから
       if (i + 1 > K) {
         break;
       }
+      // 今までの累積和
+      // あるところで切った時の累積
+      ll now = t;
+
       // まず1周期の和で場合分けを行う
       // 負の場合は前の方で切る方が良い
       // 正の場合は後ろの方で切る方が良い
       // 正の場合は可能な限り積む
       if (total > 0) {
         // 残り回数
-        ll rest = (K - (i + 1));
+        ll rest = K - (i + 1);
         // 可能な回数
         ll possibility = rest / period_length;
         now += total * possibility;
