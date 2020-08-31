@@ -10,26 +10,15 @@
 
 const int MOD = 1000000007;
 int N;
-ll * A;
+int * A;
 
-ll solve() {
-  ll ans = 0;
+int solve() {
+  int ans = 0;
+  int x = 0;
 
-  int m = N - 1;
-  int j = 0;
-
-  while(1) {
-    if (m == 0) break;
-    rep(i, m) {
-      ans = ((ans % MOD) + ((A[j] % MOD) * (A[j + 1 + i] % MOD))) % MOD;
-      // printf("A[j]: %lld\n", A[j]);
-      // printf("A[j] MOD: %d\n", A[j] % MOD);
-      // printf("A[j + 1 + i]: %lld\n", A[j + 1 + i]);
-      // printf("A[j + 1 + i] MOD: %d\n", A[j + 1 + i] % MOD);
-      // printf("ans: %lld\n", ans);
-    }
-    j += 1;
-    m -= 1;
+  rep(i, N) {
+    ans = (ans + (ll)A[i] * x) % MOD;
+    x = (x + A[i]) % MOD;
   }
 
   return ans;
@@ -37,10 +26,10 @@ ll solve() {
 
 int main() {
   scanf("%d", &N);
-  A = array(N, ll);
-  rep(i, N) scanf("%lld", A + i);
+  A = array(N, int);
+  rep(i, N) scanf("%d", A + i);
 
-  printf("%lld\n", solve());
+  printf("%d\n", solve());
 
   free(A);
   return 0;
