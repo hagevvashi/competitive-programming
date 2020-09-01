@@ -10,7 +10,7 @@
 
 #define SIZE 3
 
-enum status {
+enum STATUS {
   EMPTY,
   AVAILABLE,
   FULL
@@ -20,7 +20,7 @@ typedef struct {
   int data[SIZE];
   int head;
   int tail;
-  int flag;
+  enum STATUS flag;
 } queue_t;
 
 // キューの中身を print 出力
