@@ -11,6 +11,7 @@
 
 int N;
 int * parent;
+int * rank;
 
 int root(int x) {
   // printf("x: %d\n", x);
@@ -61,13 +62,30 @@ void unite(int x, int y) {
   }
 
   // printf("//// x != y ////\n");
-  // printf("//// parent[x] = y; ////\n");
-  parent[x] = y;
+
+  if (rank[x] < rank[y]) {
+    parent[x] = y;
+  } else {
+    parent[y] = x;
+    if (rank[x] == rank[y]) {
+      rank[x] += 1;
+    }
+  }
   // rep(i, N) {
   //   printf("parent[%d]: ", i);
   //   printf("%d\n", parent[i]);
   // }
   // printf("\n");
+}
+
+void init() {
+  parent = array(N, int);
+  rank = array(N, int);
+
+  rep(i, N) {
+    parent[i] = i;
+    rank[i] = 0;
+  }
 }
 
 /**
@@ -88,10 +106,7 @@ int main() {
   scanf("%d%d", &N, &Q);
 
   // initialize
-  parent = array(N, int);
-  rep(i, N) {
-    parent[i] = i;
-  }
+  init();
 
   int * P = array(Q, int);
   int * A = array(Q, int);
@@ -109,6 +124,7 @@ int main() {
   }
 
   free(parent);
+  free(rank);
   free(P);
   free(A);
   free(B);
