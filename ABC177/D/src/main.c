@@ -8,24 +8,71 @@
 #define max(p, q)((p) > (q) ? (p) : (q))
 #define min(p, q)((p) < (q) ? (p) : (q))
 
-int N, M;
-int * A;
-int * B;
+int N;
+int * parent;
+int * rank;
+
+int root(int x) {
+  if (parent[x] == x) {
+    return x;
+  }
+
+  return parent[x] = root(parent[x]);
+}
+
+int same(int x, int y) {
+  return root(x) == root(y);
+}
+
+void unite(int x, int y) {
+  x = root(x);
+  y = root(y);
+
+  if (x == y) {
+    return;
+  }
+
+  if (rank[x] < rank[y]) {
+    parent[x] = y;
+  } else {
+    parent[y] = x;
+    if (rank[x] == rank[y]) {
+      rank[x] += 1;
+    }
+  }
+}
+
+void init() {
+  parent = array(N, int);
+  rank = array(N, int);
+
+  rep(i, N) {
+    parent[i] = i;
+    rank[i] = 0;
+  }
+}
 
 int main() {
+  int M;
   scanf("%d%d", &N, &M);
-  A = array(M, int);
-  B = array(M, int);
-  rep(i, M) {
-    scanf("%d%d", A + i, B + i);
-  }
+
+  init();
 
   rep(i, M) {
-    A[i] -= 1;
-    B[i] -= 1;
+    int A, B;
+    scanf("%d%d", &A, &B);
+    A -= 1;
+    B -= 1;
+    unite(A, B);
   }
 
-  free(A);
-  free(B);
+  int ans = 0;
+  rep(i, N) {
+    
+  }
+
+  free(parent);
+  free(rank);
+
   return 0;
 }
