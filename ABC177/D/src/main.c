@@ -12,6 +12,16 @@ int N;
 int * parent;
 int * rank;
 
+void init() {
+  parent = array(N, int);
+  rank = array(N, int);
+
+  rep(i, N) {
+    parent[i] = i;
+    rank[i] = 0;
+  }
+}
+
 int root(int x) {
   if (parent[x] == x) {
     return x;
@@ -42,14 +52,8 @@ void unite(int x, int y) {
   }
 }
 
-void init() {
-  parent = array(N, int);
-  rank = array(N, int);
-
-  rep(i, N) {
-    parent[i] = i;
-    rank[i] = 0;
-  }
+int size(int x) {
+  return rank[root(x)];
 }
 
 int main() {
@@ -68,8 +72,10 @@ int main() {
 
   int ans = 0;
   rep(i, N) {
-    
+    ans = max(ans, size(i));
   }
+
+  printf("%d\n", ans);
 
   free(parent);
   free(rank);
