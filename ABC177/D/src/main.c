@@ -9,17 +9,31 @@
 #define min(p, q)((p) < (q) ? (p) : (q))
 
 int N;
+int * data;
 int * parent;
 int * rank;
 
 void init() {
   parent = array(N, int);
   rank = array(N, int);
+  // child: parent's index
+  // root: -size
+  data = array(N, int);
 
   rep(i, N) {
+    // at first, all data is root and size is -1
+    data[i] = -1;
     parent[i] = i;
     rank[i] = 0;
   }
+}
+
+int find(int x) {
+  if (data[x] < 0) {
+    return x;
+  }
+
+  return data[x] = find(data[x]);
 }
 
 int root(int x) {
@@ -32,6 +46,15 @@ int root(int x) {
 
 int same(int x, int y) {
   return root(x) == root(y);
+}
+
+int join(int x, int y) {
+  x = find(x);
+  y = find(y);
+  if (x == y) {
+    return 0;
+  }
+  return 1;
 }
 
 void unite(int x, int y) {
