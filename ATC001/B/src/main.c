@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define rep(i, n) for (int i = 0; i < n; i = i + 1)
 #define array(N, t) (t*)calloc(N, sizeof(t))
@@ -8,84 +7,51 @@
 #define INF ((1LL << 62) - (1LL << 31))
 #define max(p, q)((p) > (q) ? (p) : (q))
 #define min(p, q)((p) < (q) ? (p) : (q))
+#define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int N;
-int * parent;
-int * rank;
+int * data;
 
-int root(int x) {
-  // printf("x: %d\n", x);
-  if (parent[x] == x) {
-    // printf("//// parent[x] == x ////\n");
+void init() {
+  // child: parent's index
+  // root: -size
+  data = array(N, int);
+
+  rep(i, N) {
+    // at first, all data is root and size is -1
+    data[i] = -1;
+  }
+}
+
+int find(int x) {
+  if (data[x] < 0) {
     return x;
   }
 
-  // printf("//// parent[x] != x ////\n");
-  // printf("//// parent[x] = root(parent[x]); ////\n");
-  return parent[x] = root(parent[x]);
+  return data[x] = find(data[x]);
 }
 
 int same(int x, int y) {
-  return root(x) == root(y);
+  return find(x) == find(y);
 }
 
-void unite(int x, int y) {
-  // printf("unite(%d, %d)\n", x, y);
-
-  // rep(i, N) {
-  //   printf("parent[%d]: ", i);
-  //   printf("%d\n", parent[i]);
-  // }
-
-  // printf("root(%d): \n", x);
-  x = root(x);
-  // printf("x...%d\n", x);
-
-  // rep(i, N) {
-  //   printf("parent[%d]: ", i);
-  //   printf("%d\n", parent[i]);
-  // }
-
-  // printf("root(%d): \n", y);
-  y = root(y);
-  // printf("y...%d\n", y);
-
-  // rep(i, N) {
-  //   printf("parent[%d]: ", i);
-  //   printf("%d\n", parent[i]);
-  // }
-
+int unite(int x, int y) {
+  x = find(x);
+  y = find(y);
   if (x == y) {
-    // printf("//// x == y ////\n");
-    // printf("\n");
-    return;
+    return 0;
   }
-
-  // printf("//// x != y ////\n");
-
-  if (rank[x] < rank[y]) {
-    parent[x] = y;
-  } else {
-    parent[y] = x;
-    if (rank[x] == rank[y]) {
-      rank[x] += 1;
-    }
+  // becasue data has minus size, reverse the inequality sign
+  if (data[x] > data[y]) {
+    swap(int, x, y);
   }
-  // rep(i, N) {
-  //   printf("parent[%d]: ", i);
-  //   printf("%d\n", parent[i]);
-  // }
-  // printf("\n");
+  data[x] += data[y];
+  data[y] = x;
+  return 1;
 }
 
-void init() {
-  parent = array(N, int);
-  rank = array(N, int);
-
-  rep(i, N) {
-    parent[i] = i;
-    rank[i] = 0;
-  }
+int size(int x) {
+  return -data[find(x)];
 }
 
 /**
@@ -123,8 +89,7 @@ int main() {
     }
   }
 
-  free(parent);
-  free(rank);
+  free(data);
   free(P);
   free(A);
   free(B);
