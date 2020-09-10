@@ -7,15 +7,12 @@
 #define INF ((1LL << 62) - (1LL << 31))
 #define max(p, q)((p) > (q) ? (p) : (q))
 #define min(p, q)((p) < (q) ? (p) : (q))
+#define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int N;
 int * data;
-int * parent;
-int * rank;
 
 void init() {
-  parent = array(N, int);
-  rank = array(N, int);
   // child: parent's index
   // root: -size
   data = array(N, int);
@@ -23,8 +20,6 @@ void init() {
   rep(i, N) {
     // at first, all data is root and size is -1
     data[i] = -1;
-    parent[i] = i;
-    rank[i] = 0;
   }
 }
 
@@ -36,47 +31,27 @@ int find(int x) {
   return data[x] = find(data[x]);
 }
 
-int root(int x) {
-  if (parent[x] == x) {
-    return x;
-  }
-
-  return parent[x] = root(parent[x]);
-}
-
 int same(int x, int y) {
-  return root(x) == root(y);
+  return find(x) == find(y);
 }
 
-int join(int x, int y) {
+int unite(int x, int y) {
   x = find(x);
   y = find(y);
   if (x == y) {
     return 0;
   }
+  // becasue data has minus size, reverse the inequality sign
+  if (data[x] > data[y]) {
+    swap(int, x, y);
+  }
+  data[x] += data[y];
+  data[y] = x;
   return 1;
 }
 
-void unite(int x, int y) {
-  x = root(x);
-  y = root(y);
-
-  if (x == y) {
-    return;
-  }
-
-  if (rank[x] < rank[y]) {
-    parent[x] = y;
-  } else {
-    parent[y] = x;
-    if (rank[x] == rank[y]) {
-      rank[x] += 1;
-    }
-  }
-}
-
 int size(int x) {
-  return rank[root(x)];
+  return -data[find(x)];
 }
 
 int main() {
@@ -100,8 +75,7 @@ int main() {
 
   printf("%d\n", ans);
 
-  free(parent);
-  free(rank);
+  free(data);
 
   return 0;
 }
