@@ -9,12 +9,23 @@
 #define min(p, q)((p) < (q) ? (p) : (q))
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
+int N;
+int * x;
+int * y;
+
 int main() {
-  int S;
+  scanf("%d", &N);
 
-  scanf("%d", &S);
+  x = array(N, int);
+  y = array(N, int);
 
-  int max_digits = S / 3;
+  rep(i, N) {
+    scanf("%d%d", x + i, y + i);
+  }
+
+  rep(i, N) {
+
+  }
 
   return 0;
 }

@@ -10,5 +10,7 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  
+
   return 0;
 }
