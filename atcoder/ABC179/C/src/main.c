@@ -48,10 +48,17 @@ void solve2() {
   }
 }
 
+void solve3() {
+  for (int A = 1; A < N; A += 1) {
+    ans += (N - 1) / A;
+  }
+}
+
 int main() {
   scanf("%d", &N);
   // solve1();
-  solve2();
+  // solve2();
+  solve3();
   printf("%d\n", ans);
   return 0;
 }
