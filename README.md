@@ -7,14 +7,14 @@ cd ${repo_dir}
 mkdir -p ${contest_name}/${question_name}/src
 mkdir -p ${contest_name}/${question_name}/dist
 cd ${contest_name}/${question_name}
-cp ../../template.c ./src/main.c
+cp ../../../template.c ./src/main.c
 ```
 
 ## コンパイル方法
 
 ```bash
 cd ${repo_dir}/${contest_name}/${question_name}
-gcc -o ./dist/main.o ./src/main.c
+gcc -std=c11 -o ./dist/main.out ./src/main.c
 ```
 
 ## 実行方法
