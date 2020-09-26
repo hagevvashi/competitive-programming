@@ -10,5 +10,12 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  int K;
+  scanf("%d", &K);
+
+  rep(i, K) {
+    printf("ACL");
+  }
+
   return 0;
 }

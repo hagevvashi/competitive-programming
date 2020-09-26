@@ -10,5 +10,32 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  ll A, B, C, D;
+
+  scanf("%lld%lld%lld%lld", &A, &B, &C, &D);
+
+  if (A <= C) {
+    if (C <= B) {
+      // ok
+      puts("Yes");
+      return 0;
+    } else {
+      // ng
+      puts("No");
+      return 0;
+    }
+  } else {
+    // A > C
+    if (A <= D) {
+      // ok
+      puts("Yes");
+      return 0;
+    } else {
+      // ng
+      puts("No");
+      return 0;
+    }
+  }
+
   return 0;
 }
