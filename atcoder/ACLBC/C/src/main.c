@@ -67,16 +67,24 @@ int main() {
     unite(A, B);
   }
 
-  int ans = 0;
-  rep(i, N - 1) {
-    if (same(i, i + 1)) {
-    } else {
-      unite(i, i + 1);
-      ans += 1;
+  /* int ans = 0; */
+  /* rep(i, N - 1) { */
+  /*   if (same(i, i + 1)) { */
+  /*   } else { */
+  /*     unite(i, i + 1); */
+  /*     ans += 1; */
+  /*   } */
+  /* } */
+
+  int cnt = 0;
+
+  rep(i, N) {
+    if (find(i) == i) {
+      cnt += 1;
     }
   }
 
-  printf("%d\n", ans);
+  printf("%d\n", cnt - 1);
 
   free(data);
 
