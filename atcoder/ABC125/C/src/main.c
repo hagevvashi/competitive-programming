@@ -11,28 +11,25 @@
 
 int n;
 int *a;
-int *x;
-int gcd(int a,int b) {
-  if(a<b)swap(int,a,b);
-  int r=a%b;
-  while(r!=0){
-    a=b;
-    b=r;
-    r=a%b;
-  }
-  return b;
+int *l;
+int *r;
+int gcd(int x,int y){
+  if(y == 0)return x;
+  return gcd(y,x%y);
 }
 int main() {
   scanf("%d",&n);
   a=array(n,int);
-  x=array(n,int);
+  l=array(n,int);
+  r=array(n,int);
   rep(i,n)scanf("%d",a+i);
-  x[0]=gcd(a[0],a[1]);
-  for(int i=1;i<n-1;i+=1){
-    x[i]=gcd(x[i-1],a[i+1]);
-  }
-  printf("%d\n",x[n-2]);
+  rep(i,n-1)l[i+1]=gcd(l[i],a[i]);
+  for(int i=n-1;i>=1;--i)r[i-1]=gcd(r[i],a[i]);
+  int ans=1;
+  rep(i,n)ans=max(ans,gcd(l[i],r[i]));
+  printf("%d\n",ans);
   free(a);
-  free(x);
+  free(l);
+  free(r);
   return 0;
 }
