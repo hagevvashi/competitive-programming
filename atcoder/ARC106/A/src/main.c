@@ -16,51 +16,60 @@ ll f[30]={0};
 ll aa=-1;
 ll ba=-1;
 
-ll pw(ll x,ll y){
-  ll r=1;
-  rep(i,y)r*=x;
-  return r;
+int judge_overflow(long long * result, long long a, long long b, long long(* calc)(const long long x, const long long y)) {
+  *result = calc(a, b);
+  if (a > 0 && b > 0 && *result < 0) {
+    return -1;
+  }
+  if (a < 0 && b < 0 && *result > 0) {
+    return -1;
+  }
+  return 0;
 }
 
-/* ll tf(){ */
-/*   ll i=0; */
-/*   while(n>=pw(3,i)){ */
-/*     t[i]=pw(3,i); */
-/*     i+=1; */
-/*   } */
-/*   return i; */
-/* } */
+long long multiple(long long y, long long x) {
+  return x * y;
+};
 
-/* ll ff(){ */
-/*   ll i=0; */
-/*   while(n>=pw(5,i)){ */
-/*     f[i]=pw(5,i); */
-/*     i+=1; */
-/*   } */
-/*   return i; */
-/* } */
+int multiple_overflow(long long * result, long long a, long long b) {
+  return judge_overflow(result, a, b, multiple);
+}
 
-/* void solve(){ */
-/*   ll a=tf(); */
-/*   ll b=ff(); */
-
-/*   rep(i,a){ */
-/*     rep(j,b){ */
-/*       /\* printf("t[%d]: %lld\n",i,t[i]); *\/ */
-/*       /\* printf("f[%d]: %lld\n",j,f[j]); *\/ */
-/*       if(n==t[i]+f[j]){ */
-/*         aa=i; */
-/*         ba=j; */
-/*         return; */
-/*       } */
-/*     } */
-/*   } */
-/*   return; */
-/* } */
+long long pw(int a, int b) {
+  long long * res = (long long *)malloc(sizeof(long long));
+  *res = 1;
+  for (int i = 0; i < b; i += 1) {
+    int r = multiple_overflow(res, *res, a);
+    if (r == -1) {
+      return -1;
+    }
+  }
+  return * res;
+  free(res);
+}
 
 void solve(){
-  for(int a=1;a<38;a+=1){
-    for(int b=1;b<26;b+=1){
+  int am=0,bm=0;
+  while(pw(3,am)!=-1)am+=1;
+  while(pw(5,bm)!=-1)bm+=1;
+
+  int tam=0;
+  rep(i,am){
+    if(pw(3,i)>1000000000000000000){
+      tam=i;
+      break;
+    }
+  }
+  int tbm=0;
+  rep(i,bm){
+    if(pw(5,i)>1000000000000000000){
+      tbm=i;
+      break;
+    }
+  }
+
+  for(int a=1;a<tam;a+=1){
+    for(int b=1;b<tbm;b+=1){
       if(pw(3,a)+pw(5,b)==n){
         aa=a;
         ba=b;
@@ -72,26 +81,6 @@ void solve(){
 
 int main() {
   scanf("%lld",&n);
-  /* ll x=n/5; */
-  /* printf("x: %lld\n",x); */
-  /* ll y=x*5; */
-  /* printf("y: %lld\n",y); */
-  /* ll b=0; */
-  /* ll p=1; */
-  /* while(p<=y){ */
-  /*   rep(i,b){ */
-  /*     p*=5; */
-  /*   } */
-  /*   b+=1; */
-  /* } */
-  /* b-=1; */
-  /* p/=5; */
-  /* printf("b: %lld\n",b); */
-  /* printf("p: %lld\n",p); */
-
-  /* ll foo=log(1000); */
-  /* printf("foo: %lld\n", foo); */
-
   solve();
   if(aa>-1 && ba>-1){
     printf("%lld %lld\n",aa,ba);
