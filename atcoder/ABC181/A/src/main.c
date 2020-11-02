@@ -9,6 +9,11 @@
 #define min(p, q)((p) < (q) ? (p) : (q))
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
+int n;
+
 int main() {
+  scanf("%d",&n);
+  if(n%2==0)puts("White");
+  else puts("Black");
   return 0;
 }
