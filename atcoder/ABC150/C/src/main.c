@@ -10,6 +10,9 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 #define my_abs(x) ((x) >= 0 ? (x) : -(x))
 
+/**
+ * 0-12までの階上を持っている配列
+ */
 int factorial[13] = {
   0,
   1,
@@ -44,16 +47,25 @@ int count_smaller_value_item(int * items, int current_index) {
   return re;
 };
 
-int f(int * items,int n) {
+int f(int * items, int n) {
   int dictionary_order = 1;
 
   rep(i, n - 1) {
+    // 次の桁の階上がそのままテーブルの幅となる
+    // 1桁目が決まっている時点で、全体の個数-1の選択肢から全体の個数-1を選ぶ順列になるから
     int range = factorial[n - (i + 1)];
-    int start_point = range * (items[i] - 1);
+    printf("range:%d\n", range);
+    // 現在の桁の数字にテーブルの幅をかけると、どのテーブルに乗っているかが判明する
+    int base = range * (items[i] - 1);
+    printf("base:%d\n", base);
+    // しかし、同じ数字は複数回登場しないため、
     int x = range * count_smaller_value_item(items, i);
-    int table = start_point - x;
+    printf("x:%d\n",x);
+    int table = base - x;
+    printf("table:%d\n",table);
     dictionary_order += table;
-    // printf("dictionary_order:%d\n", dictionary_order);
+    printf("dictionary_order:%d\n", dictionary_order);
+    puts("");
   }
   return dictionary_order;
 }
