@@ -56,9 +56,15 @@ int f(int * items, int n) {
     int range = factorial[n - (i + 1)];
     printf("range:%d\n", range);
     // 現在の桁の数字にテーブルの幅をかけると、どのテーブルに乗っているかが判明する
+    // 例えば、N=4, {2,4,*,*}, i=1 の場合
+    // 2-1-*-*: 7,8
+    // 2-2-*-*: 9,10
+    // 2-3-*-*: 11,12
+    // 2-4-*-*: 13,14
+    // となるが
     int base = range * (items[i] - 1);
     printf("base:%d\n", base);
-    // しかし、同じ数字は複数回登場しないため、
+    // しかし、同じ数字は複数回登場しないため、実際には 2-2-*-* はない
     int x = range * count_smaller_value_item(items, i);
     printf("x:%d\n",x);
     int table = base - x;
