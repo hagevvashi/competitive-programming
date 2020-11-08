@@ -9,6 +9,10 @@
 #define min(p, q)((p) < (q) ? (p) : (q))
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
+int a,b;
+
 int main() {
+  scanf("%d%d",&a,&b);
+  printf("%d\n",((2*a)+100)-b);
   return 0;
 }
