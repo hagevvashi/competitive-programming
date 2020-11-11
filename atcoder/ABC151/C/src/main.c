@@ -17,7 +17,7 @@ char s[100010][3];
 
 int main() {
   scanf("%d%d",&n,&m);
-  p=array(n,int);
+  p=array(m,int);
   rep(i,m){
     scanf("%d",p+i);
     p[i]-=1;
@@ -32,6 +32,11 @@ int main() {
       if(t[p[i]]!=1){
         f[p[i]]+=1;
       }
+    }
+  }
+  rep(i,n){
+    if(t[i]==0){
+      f[i]=0;
     }
   }
   int ta=0;
