@@ -10,35 +10,43 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int n;
-char**s;
+char**str_array;
 int*cnt;
+
+int cmpfunc(const void *a,const void *b){
+  return *(char*)a - *(char*)b;
+}
 
 int main() {
   scanf("%d",&n);
   cnt=array(n,int);
-  s=(char**)malloc(sizeof(char*)*n);
+  str_array=(char**)malloc(sizeof(char*)*n);
   rep(i,n){
-    s[i]=(char*)malloc(sizeof(char)*11);
-    scanf("%s",s[i]);
+    str_array[i]=(char*)malloc(sizeof(char)*11);
+    scanf("%s",str_array[i]);
   }
+
   puts("ここから入力状態の出力");
   rep(i,n){
-    puts(s[i]);
+    puts(str_array[i]);
   }
-  rep(i,11){
-    for(int j=1;j<n;j+=1){
-      if(s[j-1][i] > s[j][i]){
-        swap(char*,s[j-1],s[j]);
-      }
-    }
-  }
-  puts("ここから入並び替え後の出力");
+
+  qsort(
+    str_array,
+    sizeof(str_array) / sizeof(str_array[0]),
+    (size_t)sizeof(str_array[0]),
+    cmpfunc);
+
+  puts("ここから並び替え後の出力");
   rep(i,n){
-    puts(s[i]);
+    puts(str_array[i]);
   }
+
+  // メモリ解放
   rep(i,n){
-    free(s[i]);
+    free(str_array[i]);
   }
-  free(s);
+  free(str_array);
+
   return 0;
 }
