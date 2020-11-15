@@ -10,5 +10,9 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  int x;
+  scanf("%d",&x);
+  if(x<0)printf("%d\n",0);
+  else printf("%d\n",x);
   return 0;
 }
