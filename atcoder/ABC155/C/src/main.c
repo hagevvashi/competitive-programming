@@ -11,25 +11,31 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int cmpfunc(const void *str_a,const void *str_b){
-  // return -1;
+  // return 1;
   return strcmp((char*)str_a,(char*)str_b);
 }
 
+
 int main() {
+  typedef struct _T_CNT {
+    char str[11];
+    int cnt;
+  } T_CNT;
+
   int n;
-  char**str_array;
-  int*cnt;
+  // char**str_array;
+  // int*cnt;
+  char str_array[200010][11];
+  T_CNT o[200010];
 
   scanf("%d",&n);
-  cnt=array(n,int);
-  str_array=(char**)malloc(sizeof(char*)*n);
+  // cnt=array(n,int);
+  // str_array=(char**)malloc(sizeof(char)*11*n);
 
   rep(i,n){
-    str_array[i]=(char*)malloc(sizeof(char)*11);
+    // str_array[i]=(char*)malloc(sizeof(char)*11);
     scanf("%s",str_array[i]);
   }
-
-  puts("");
 
   puts("ここから入力状態の出力");
   rep(i,n){
@@ -39,7 +45,7 @@ int main() {
   qsort(
     str_array,
     n,
-    (size_t)(sizeof(str_array[0])),
+    11,
     cmpfunc
   );
 
@@ -48,12 +54,31 @@ int main() {
     puts(str_array[i]);
   }
 
-  // メモリ解放
-  rep(i,n){
-    free(str_array[i]);
+  int o_i=0;
+  rep(i,n-1){
+    if(strcmp(str_array[i],str_array[i+1])==0){
+      if(strcmp(o[o_i].str,str_array[i])==0){
+        o[o_i].cnt+=1;
+      } else {
+        strcpy(o[o_i].str,str_array[i]);
+        o[o_i].cnt+=1;
+        o_i+=1;
+      }
+    }
   }
-  free(str_array);
-  free(cnt);
+
+  puts("ここから構造体出力");
+  rep(i,o_i+1){
+    printf("%d\n",o[i].cnt);
+    printf("%s\n",o[i].str);
+  }
+
+  // メモリ解放
+  /* rep(i,n){ */
+  /*   free(str_array[i]); */
+  /* } */
+  // free(str_array);
+  // free(cnt);
 
   return 0;
 }
