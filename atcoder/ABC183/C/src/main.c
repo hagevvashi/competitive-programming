@@ -59,7 +59,7 @@ int factorial[13] = {
 
 /**
  * @funtion next_permutation
- * @param {int} a
+ * @param {int *} a
  * @param {int} cnt
  * @return int
  */
@@ -104,6 +104,13 @@ int main() {
     int time = 0;
     rep(i, n) {
       int a = idx[i];
+      // n=7 の時
+      // i=5 の時
+      // i+1=6
+      // (i+1)%n=6
+      // i=6 の時
+      // i+1=7
+      // (i+1)%n=0
       int b = idx[(i + 1) % n];
       time += t[a][b];
     }
@@ -111,7 +118,6 @@ int main() {
       ans += 1;
     }
   } while (next_permutation(idx + 1, n - 1));
-
 
   // 標準入力できたか確認
   /* rep(i,n)rep(j,n){ */

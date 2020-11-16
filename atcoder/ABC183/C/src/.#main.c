@@ -1,1 +1,0 @@
-sugahara_naoto@Mac-451.11278
