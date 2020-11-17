@@ -7,7 +7,7 @@
 #define INF ((1LL << 62) - (1LL << 31))
 #define max(p, q)((p) > (q) ? (p) : (q))
 #define min(p, q)((p) < (q) ? (p) : (q))
-#define swap(type, a, b) { type temp = a; a = b; b = temp; }
+#define swap(a, b, type) { type temp = a; a = b; b = temp; }
 
 /**
  * 0-12までの階上を持っている配列
@@ -64,22 +64,57 @@ int factorial[13] = {
  * @return int
  */
 int next_permutation(int * a, int cnt) {
-  int l = cnt - 1, r = cnt - 1;
+  puts("---- [start] next_permutation");
+  printf("cnt:%d\n",cnt);
+  int l = cnt - 1;
+  int r = cnt - 1;
   int ret = 0;
-  int t;
-  while (--l >= 0 && a[l] >= a[l + 1]);
-  if (l >= 0) {
-    ret = 1;
-    while (a[l] >= a[r]) {
-      r -= 1;
+  // while (--l >= 0 && a[l] >= a[l + 1]);
+  puts("---- [start] while");
+  while(1) {
+    l -= 1;
+    printf("----   l -= 1 -> %d\n",l);
+    if (l < 0) {
+      puts("----   if (l < 0) then break");
+      break;
     }
-    t = a[l];
-    a[l] = a[r];
-    a[r] = t;
+    printf("a[%d]:%d\n",l,a[l]);
+    printf("a[%d]:%d\n",l+1,a[l+1]);
+    if (a[l] < a[l + 1]) {
+      puts("----   if (a[l] < a[l + 1]) then break");
+      break;
+    }
   }
+  puts("---- [end] while");
+  if (l >= 0) {
+    printf("---- if (l:%d >= 0) {\n", l);
+    puts("----   ret = 1");
+    ret = 1;
+    puts("----   [start] while");
+    while (a[l] >= a[r]) {
+      printf("----     if (a[%d] >= a[%d]) {\n----       r -= 1\n----     }\n",l,r);
+      r -= 1;
+      printf("r:%d\n",r);
+    }
+    puts("----   [end] while");
+    swap(a[l], a[r], int);
+    printf("----   swap(a[%d],a[%d]);\n",l,r);
+    /* t = a[l]; */
+    /* a[l] = a[r]; */
+    /* a[r] = t; */
+    puts("---- }");
+  }
+  puts("---- for {");
   for (l += 1, r = cnt - 1; l < r; l += 1, r -= 1) {
-    t = a[l], a[l] = a[r], a[r] = t;
+    /* t = a[l]; */
+    /* a[l] = a[r]; */
+    /* a[r] = t; */
+    swap(a[l], a[r], int);
+    printf("----   swap(a[%d],a[%d]);\n",l,r);
   }
+  puts("---- }");
+  puts("---- [end] next_permutation");
+  puts("");
   return ret;
 }
 
