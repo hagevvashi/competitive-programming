@@ -68,6 +68,8 @@ int next_permutation(int * a, int cnt) {
   printf("cnt:%d\n",cnt);
   int l = cnt - 1;
   int r = cnt - 1;
+  printf("l:%d\n",l);
+  printf("r:%d\n",r);
   int ret = 0;
   // while (--l >= 0 && a[l] >= a[l + 1]);
   puts("---- [start] while");
@@ -80,6 +82,10 @@ int next_permutation(int * a, int cnt) {
     }
     printf("a[%d]:%d\n",l,a[l]);
     printf("a[%d]:%d\n",l+1,a[l+1]);
+    rep(i, cnt + 1) {
+      printf("a[%d]:%d  ", i, a[i]);
+    }
+    puts("");
     if (a[l] < a[l + 1]) {
       puts("----   if (a[l] < a[l + 1]) then break");
       break;
