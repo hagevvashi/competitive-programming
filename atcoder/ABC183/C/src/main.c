@@ -140,6 +140,11 @@ int main() {
     idx[i] = i;
   }
 
+  rep(i, n) {
+    printf("idx[%d]:%d  ", i, idx[i]);
+  }
+  puts("");
+
   int ans=0;
   do {
     int time = 0;
