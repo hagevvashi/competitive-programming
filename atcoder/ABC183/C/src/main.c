@@ -105,6 +105,10 @@ int next_permutation(int * a, int cnt) {
     puts("----   [end] while");
     swap(a[l], a[r], int);
     printf("----   swap(a[%d],a[%d]);\n",l,r);
+    rep(i, cnt) {
+      printf("a[%d]:%d  ", i, a[i]);
+    }
+    puts("");
     /* t = a[l]; */
     /* a[l] = a[r]; */
     /* a[r] = t; */
@@ -117,6 +121,10 @@ int next_permutation(int * a, int cnt) {
     /* a[r] = t; */
     swap(a[l], a[r], int);
     printf("----   swap(a[%d],a[%d]);\n",l,r);
+    rep(i, cnt) {
+      printf("a[%d]:%d  ", i, a[i]);
+    }
+    puts("");
   }
   puts("---- }");
   puts("---- [end] next_permutation");
