@@ -82,7 +82,7 @@ int next_permutation(int * a, int cnt) {
     }
     printf("a[%d]:%d\n",l,a[l]);
     printf("a[%d]:%d\n",l+1,a[l+1]);
-    rep(i, cnt + 1) {
+    rep(i, cnt) {
       printf("a[%d]:%d  ", i, a[i]);
     }
     puts("");
@@ -110,7 +110,7 @@ int next_permutation(int * a, int cnt) {
     /* a[r] = t; */
     puts("---- }");
   }
-  puts("---- for {");
+  printf("---- for (l += 1: %d, r = cnt - 1: %d; l < r; l += 1, r -= 1) {\n",l+1,cnt-1);
   for (l += 1, r = cnt - 1; l < r; l += 1, r -= 1) {
     /* t = a[l]; */
     /* a[l] = a[r]; */
@@ -144,6 +144,12 @@ int main() {
     printf("idx[%d]:%d  ", i, idx[i]);
   }
   puts("");
+
+  int * foo = idx + 1;
+  puts("int * foo = idx + 1;");
+  rep(i, n - 1) {
+    printf("foo[%d]:%d\n",i,foo[i]);
+  }
 
   int ans=0;
   do {
