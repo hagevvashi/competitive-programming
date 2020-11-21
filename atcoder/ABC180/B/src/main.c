@@ -16,17 +16,19 @@ int main() {
   ll x[n];
   rep(i,n)scanf("%lld",x+i);
   ll ma=0;
-  long double uc=0;
-  int ch=0;
+  double uc=0;
+  ll ch=0;
+
   rep(i,n){
     if(x[i]<0)x[i]=-x[i];
     ma+=x[i];
     uc+=x[i]*x[i];
     ch=max(x[i],ch);
   }
+
   printf("%lld\n",ma);
-  printf("%.15Lf\n",sqrtl(uc));
-  printf("%d\n",ch);
+  printf("%.15lf\n",sqrt(uc));
+  printf("%lld\n",ch);
 
   return 0;
 }
