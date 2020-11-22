@@ -10,5 +10,22 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  int n,x;
+  scanf("%d%d",&n,&x);
+  char s[n+1];
+  scanf("%s",s);
+  int score=x;
+  rep(i,n){
+    if(s[i]=='x'){
+      if(score>0){
+        score-=1;
+      }
+    }else{
+      if(s[i]=='o'){
+        score+=1;
+      }
+    }
+  }
+  printf("%d\n",score);
   return 0;
 }
