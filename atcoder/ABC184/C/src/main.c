@@ -10,6 +10,7 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int solve(int x,int y){
+  // 2点が一致するパターン（0手）
   if (x == 0 && y == 0) return 0;
   if (0 == x+y) return 1;
   if (0 == x-y) return 1;
