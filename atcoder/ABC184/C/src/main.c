@@ -10,11 +10,17 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int solve(int x,int y){
-  // 2点が一致するパターン（0手）
+  // 0手
+  // 2点が一致するパターン
   if (x == 0 && y == 0) return 0;
+  // 1手
+  // 傾きが+1の斜め移動のみで到達可能なケース
   if (0 == x+y) return 1;
+  // 傾きが-1の斜め移動のみで到達可能なケース
   if (0 == x-y) return 1;
+  // 3回以内の隣接移動で到達可能なケース
   if (abs(x)+abs(y) <= 3) return 1;
+  // 2手
   if (0 == (x+y)%2) return 2;
   if (abs(x)+abs(y) <= 6) return 2;
   if (abs(x+y) <= 3) return 2;
