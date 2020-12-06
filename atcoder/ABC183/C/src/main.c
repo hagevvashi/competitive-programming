@@ -65,12 +65,18 @@ int factorial[13] = {
  */
 int next_permutation(int * a, int cnt) {
   puts("---- [start] next_permutation");
-  printf("cnt:%d\n",cnt);
+  printf("// cnt:%d\n",cnt);
+
   int l = cnt - 1;
+  printf("---- l = cnt - 1: %d\n", l);
   int r = cnt - 1;
-  printf("l:%d\n",l);
-  printf("r:%d\n",r);
+  printf("---- r = cnt - 1: %d\n", r);
+  puts("");
+
   int ret = 0;
+  puts("---- ret = 0");
+  puts("");
+
   // while (--l >= 0 && a[l] >= a[l + 1]);
   puts("---- [start] while");
   while(1) {
@@ -80,8 +86,9 @@ int next_permutation(int * a, int cnt) {
       puts("----   if (l < 0) then break");
       break;
     }
-    printf("a[%d]:%d\n",l,a[l]);
-    printf("a[%d]:%d\n",l+1,a[l+1]);
+    printf("// a[%d]:%d\n",l,a[l]);
+    printf("// a[%d]:%d\n",l+1,a[l+1]);
+    printf("// ");
     rep(i, cnt) {
       printf("a[%d]:%d  ", i, a[i]);
     }
@@ -92,19 +99,23 @@ int next_permutation(int * a, int cnt) {
     }
   }
   puts("---- [end] while");
+  puts("");
+  printf("// l: %d, r: %d\n", l, r);
   if (l >= 0) {
-    printf("---- if (l:%d >= 0) {\n", l);
+    puts("---- if (l >= 0) {");
     puts("----   ret = 1");
     ret = 1;
-    puts("----   [start] while");
+    puts("----   [start] while(a[l] >= a[r])");
     while (a[l] >= a[r]) {
       printf("----     if (a[%d] >= a[%d]) {\n----       r -= 1\n----     }\n",l,r);
       r -= 1;
       printf("r:%d\n",r);
     }
     puts("----   [end] while");
+    printf("// l: %d, r: %d\n", l, r);
     swap(a[l], a[r], int);
-    printf("----   swap(a[%d],a[%d]);\n",l,r);
+    puts("----   swap(a[l],a[r]);");
+    printf("// ");
     rep(i, cnt) {
       printf("a[%d]:%d  ", i, a[i]);
     }
@@ -114,6 +125,7 @@ int next_permutation(int * a, int cnt) {
     /* a[r] = t; */
     puts("---- }");
   }
+  puts("");
   printf("---- for (l += 1: %d, r = cnt - 1: %d; l < r; l += 1, r -= 1) {\n",l+1,cnt-1);
   for (l += 1, r = cnt - 1; l < r; l += 1, r -= 1) {
     /* t = a[l]; */
@@ -127,6 +139,7 @@ int next_permutation(int * a, int cnt) {
     puts("");
   }
   puts("---- }");
+  puts("");
   puts("---- [end] next_permutation");
   puts("");
   return ret;
@@ -135,8 +148,6 @@ int next_permutation(int * a, int cnt) {
 int n,k;
 int t[9][9];
 int idx[9];
-// int db[5040]={0};
-// int dbi=0;
 
 int main() {
   scanf("%d%d",&n,&k);
@@ -153,14 +164,13 @@ int main() {
   }
   puts("");
 
-  int * foo = idx + 1;
-  puts("int * foo = idx + 1;");
-  rep(i, n - 1) {
-    printf("foo[%d]:%d\n",i,foo[i]);
-  }
-
   int ans=0;
   do {
+    puts("");
+    rep(i, n) {
+      printf("idx[%d]:%d\n",i,idx[i]);
+    }
+    puts("");
     int time = 0;
     rep(i, n) {
       int a = idx[i];
