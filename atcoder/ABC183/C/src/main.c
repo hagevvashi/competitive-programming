@@ -79,11 +79,6 @@ int main() {
     }
   } while (next_permutation(idx + 1, n - 1));
 
-  // 標準入力できたか確認
-  /* rep(i,n)rep(j,n){ */
-  /*   printf("%d\n",t[i][j]); */
-  /* } */
-
   printf("%d\n",ans);
   return 0;
 }
