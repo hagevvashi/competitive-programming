@@ -10,5 +10,16 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
+  int a1,a2,a3,a4;
+  scanf("%d%d%d%d",&a1,&a2,&a3,&a4);
+
+  int ans=1000000000;
+  ans=min(ans,a1);
+  ans=min(ans,a2);
+  ans=min(ans,a3);
+  ans=min(ans,a4);
+
+  printf("%d\n",ans);
+
   return 0;
 }
