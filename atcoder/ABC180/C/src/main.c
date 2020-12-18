@@ -11,25 +11,25 @@
 #define swap(type, a, b) { type temp = a; a = b; b = temp; }
 
 int main() {
-  ll N,i,x[1000000],n=0;
+  ll N, x[1000000], n = 0;
 
-  scanf("%lld",&N);
+  scanf("%lld", &N);
 
-  for(i=1;i<=sqrt(N);i++){
-    if(N%i==0){
-      printf("%lld\n",i);
-      x[n]=N/i;
-      n+=1;
+  for (ll i = 1; i <= sqrt(N); i += 1) {
+    if (N % i == 0) {
+      printf("%lld\n", i);
+      x[n] = N / i;
+      n += 1;
     }
   }
-  n-=1;
+  n -= 1;
 
-  if(N/x[n]==x[n]){
-    n-=1;
+  if (N / x[n] == x[n]) {
+    n -= 1;
   }
 
-  for(i=n;i>=0;i-=1){
-    printf("%lld\n",x[i]);
+  for (ll i = n; i >= 0; i -= 1) {
+    printf("%lld\n", x[i]);
   }
 
   return 0;
