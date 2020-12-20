@@ -17,13 +17,13 @@ int mypow(int x, int y) {
   return r;
 }
 
-int contain_seven_decimal(int x) {
+int contain_seven(int x, int base) {
   int r = 0;
 
   int copy_x=x;
   int keta=0;
   while(1){
-    copy_x/=10;
+    copy_x/=base;
     keta+=1;
     if(copy_x<1){
       break;
@@ -31,7 +31,7 @@ int contain_seven_decimal(int x) {
   }
   copy_x=x;
   for (int i = keta - 1; i >= 0; i -= 1) {
-    int ketanosaishosu = mypow(10,i);
+    int ketanosaishosu = mypow(base,i);
     int ketanokazu = copy_x/ketanosaishosu;
     if (ketanokazu == 7) {
       r=1;
@@ -49,7 +49,11 @@ int main() {
 
   int ans = 0;
   rep(i,n,int){
-    if(contain_seven_decimal(i+1)==0)ans+=1;
+    if(contain_seven(i+1, 10)==0){
+      if(contain_seven(i+1, 8)==0){
+        ans+=1;
+      }
+    }
   }
 
   printf("%d\n",ans);
