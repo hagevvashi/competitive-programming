@@ -11,6 +11,27 @@
 #define swap(a, b) { int temp = a; a = b; b = temp; }
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
+int s(int n){
+  int r=0;
+  int x=n;
+  while(1){
+    int number=x%10;
+    r+=number;
+    x/=10;
+    if(x<1){
+      break;
+    }
+  }
+  return r;
+}
+
 int main() {
+  int a,b;
+  scanf("%d%d",&a,&b);
+  if(s(a)>=s(b)){
+    printf("%d\n",s(a));
+  }else{
+    printf("%d\n",s(b));
+  }
   return 0;
 }
