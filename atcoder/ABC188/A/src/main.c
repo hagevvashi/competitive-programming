@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define ll long long
 #define INF ((1LL << 62) - (1LL << 31))
@@ -12,5 +13,12 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int x,y;
+  scanf("%d%d",&x,&y);
+  if(abs(x-y)>2){
+    puts("No");
+  }else{
+    puts("Yes");
+  }
   return 0;
 }
