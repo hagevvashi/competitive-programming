@@ -12,5 +12,19 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int n;
+  scanf("%d",&n);
+  int a[n],b[n];
+  rep(i,n)scanf("%d",a+i);
+  rep(i,n)scanf("%d",b+i);
+
+  int ans=0;
+  rep(i,n){
+    ans+=a[i]*b[i];
+  }
+  // printf("%d\n",ans);
+  if(ans==0)puts("Yes");
+  else puts("No");
+
   return 0;
 }
