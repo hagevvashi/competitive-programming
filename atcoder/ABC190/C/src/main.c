@@ -25,9 +25,23 @@ int main() {
     scanf("%d%d",c+i,d+i);
   }
 
-  rep(bit,1<<k){
-    
+  int k2=1<<k; // 2^k
+  int ans=0;
+  rep(s,k2){
+    int dish[n+1];
+    rep(i,n+2)dish[i]=0;
+    rep(i,k){
+      if((s>>i)&1)dish[d[i]]+=1;
+      else dish[c[i]]+=1;
+    }
+    int now=0;
+    rep(i,m){
+      if(dish[a[i]]==0)continue;
+      if(dish[b[i]]==0)continue;
+      now+=1;
+    }
+    ans=max(ans,now);
   }
-
+  printf("%d\n",ans);
   return 0;
 }
