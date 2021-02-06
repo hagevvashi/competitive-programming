@@ -12,5 +12,22 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int n;
+  ll x;
+  scanf("%d%lld",&n,&x);
+  ll a[n];
+  rep(i,n)scanf("%lld",a+i);
+  int is_init=1;
+  rep(i,n){
+    if(a[i]!=x){
+      if(is_init){
+        printf("%lld",a[i]);
+        is_init=0;
+      }else{
+        printf(" %lld",a[i]);
+      }
+    }
+  }
+  puts("");
   return 0;
 }

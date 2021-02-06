@@ -12,5 +12,12 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int h,w;
+  scanf("%d%d",&h,&w);
+  char s[h][w+1];
+  rep(i,h){
+    scanf("%s",s[i]);
+  }
+  
   return 0;
 }
