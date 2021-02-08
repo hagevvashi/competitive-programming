@@ -18,6 +18,18 @@ int main() {
   rep(i,h){
     scanf("%s",s[i]);
   }
-  
+  int ans=0;
+  rep(i,h-1)rep(j,w-1){
+    int cnt=0;
+    rep(di,2)rep(dj,2){
+      if(s[i+di][j+dj]=='#'){
+        cnt+=1;
+      }
+    }
+    if(cnt==1 || cnt==3){
+      ans+=1;
+    }
+  }
+  printf("%d\n",ans);
   return 0;
 }
