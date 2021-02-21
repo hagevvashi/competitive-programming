@@ -18,7 +18,7 @@ int co(const void*a,const void*b){
   return *(ll*)b-*(ll*)a;
 }
 
-int f(ll x){
+int f1(ll x){
   ll l=0;
   while(1){
     ll p=pow(10,l);
@@ -61,12 +61,24 @@ int f(ll x){
   return re;
 }
 
+int f2(ll n){
+  ll c[20]={};
+  while(n){
+    c[n%10]+=1;
+    n/=10;
+  }
+  ll g1=0,g2=0;
+  for(int i=9;i>=0;i-=1)rep(j,c[i])g1=g1*10+i;
+  for(int i=0;i<=9;i+=1)rep(j,c[i])g2=g2*10+i;
+  return g1-g2;
+}
+
 int main() {
   ll n,k;
   scanf("%lld%lld",&n,&k);
   ll ans=n;
   rep(i,k){
-    ans=f(ans);
+    ans=f2(ans);
   }
   printf("%lld\n",ans);
   return 0;
