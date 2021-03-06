@@ -12,5 +12,27 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int a,b;
+  scanf("%d%d",&a,&b);
+
+  int x=a+b;
+  int y=b;
+
+  int ans;
+  if(x>=15 && y>=8){
+    ans=1;
+  }else{
+    if(x>=10&&y>=3){
+      ans=2;
+    }else{
+      if(x>=3){
+        ans=3;
+      }else{
+        ans=4;
+      }
+    }
+  }
+
+  printf("%d\n",ans);
   return 0;
 }
