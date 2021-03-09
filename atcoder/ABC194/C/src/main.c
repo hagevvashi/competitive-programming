@@ -15,8 +15,6 @@
 int a[1000000]={0};
 ll ans=0;
 
-ll cnt=0;
-
 void recursive_comb(int *indexes, int s, int rest) {
   if (rest == 0) {
     int i=indexes[0];
@@ -36,6 +34,25 @@ void foreach_comb(int n, int k) {
   recursive_comb(indexes, n - 1, k);
 }
 
+ll solve1(const int n){
+  foreach_comb(n,2);
+  return ans;
+}
+
+void solve2(const int n) {
+  const int MAX_A=200;
+  int d[401]={0};
+
+  rep(i,n){
+    rep(j,i){
+      int x=a[i]-a[j];
+      ans+=x*x;
+    }
+    d[MAX_A+a[i]]+=1;
+  }
+  printf("%lld\n",ans);
+}
+
 int main() {
   int n;
   scanf("%d",&n);
@@ -44,7 +61,8 @@ int main() {
     scanf("%d",a+i);
   }
 
-  foreach_comb(n,2);
+  // solve1(n);
+  solve2(n);
   printf("%lld\n",ans);
   return 0;
 }
