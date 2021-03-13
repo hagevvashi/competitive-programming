@@ -12,6 +12,35 @@
 #define swap(a, b) { int temp = a; a = b; b = temp; }
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
+int y[1000000]={0};
+int yi=0;
+
+int compare_int(const void *a, const void *b){
+    return *(int*)a - *(int*)b;
+}
+
+void solve1(const int a, const int b, const int w){
+  int W=w*1000;
+
+  for(int i=1;i*i<=W;i+=1){
+    if(W%i==0){
+      y[yi]=i;
+      yi+=1;
+      y[yi]=W/i;
+      yi+=1;
+    }
+  }
+  qsort(y, yi, sizeof(int), compare_int);
+  rep(i,yi){
+    if (y[i] >= a && y[i]<= b) {
+      printf("%d\n",y[i]);
+    }
+  }
+}
+
 int main() {
+  int a,b,w;
+  scanf("%d%d%d",&a,&b,&w);
+  solve1(a,b,w);
   return 0;
 }
