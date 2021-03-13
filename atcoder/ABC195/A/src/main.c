@@ -13,5 +13,9 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int m,h;
+  scanf("%d%d",&m,&h);
+  if(h%m==0)puts("Yes");
+  else puts("No");
   return 0;
 }
