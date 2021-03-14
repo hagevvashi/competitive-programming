@@ -12,6 +12,11 @@
 #define swap(a, b) { int temp = a; a = b; b = temp; }
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
+typedef struct {
+  int l; // 最小値
+  int r; // 最大値
+} ANS;
+
 int y[1000000]={0};
 int yi=0;
 
@@ -38,9 +43,26 @@ void solve1(const int a, const int b, const int w){
   }
 }
 
+ANS solve2(const int a,const int b,const int w){
+  int W=w*1000;
+  ANS ans;
+  ans.l=INF;
+  ans.r=-INF;
+  for(int n=1;n<=W;n+=1){
+    if(a*n<=W&&W<=b*n){
+      ans.l=min(ans.l,n);
+      ans.r=max(ans.r,n);
+    }
+  }
+  return ans;
+}
+
 int main() {
   int a,b,w;
   scanf("%d%d%d",&a,&b,&w);
-  solve1(a,b,w);
+  // solve1(a,b,w);
+  ANS ans=solve2(a,b,w);
+  if(ans.l==INF)puts("UNSATISFIABLE");
+  else printf("%d %d\n",ans.l,ans.r);
   return 0;
 }
