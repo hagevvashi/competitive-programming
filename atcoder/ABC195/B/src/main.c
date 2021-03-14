@@ -17,33 +17,23 @@ typedef struct {
   int r; // 最大値
 } ANS;
 
-int y[1000000]={0};
-int yi=0;
 
-int compare_int(const void *a, const void *b){
-    return *(int*)a - *(int*)b;
-}
-
-void solve1(const int a, const int b, const int w){
-  int W=w*1000;
-
-  for(int i=1;i*i<=W;i+=1){
-    if(W%i==0){
-      y[yi]=i;
-      yi+=1;
-      y[yi]=W/i;
-      yi+=1;
-    }
-  }
-  qsort(y, yi, sizeof(int), compare_int);
-  rep(i,yi){
-    if (y[i] >= a && y[i]<= b) {
-      printf("%d\n",y[i]);
-    }
-  }
-}
-
-ANS solve2(const int a,const int b,const int w){
+/**
+ * main 関数から呼ばれる。出力結果を返すだけ
+ *
+ * 選択するみかんの個数をnとする
+ * 制約条件(1<=A,A<=B,B<=1000,1<=W,W<=1000,1<=_W,_W<=1000000)より
+ * 制約上の最小(g)である1という状況を考えて、nが取りうる値をすべて試していく
+ * nがとりうる最小値は1(1個で(1000*W)(g)になるケース)
+ * nがとりうる最大値は1000*W(1(g)で10000000個必要なケース)
+ * 実際の範囲は a(g) * n(個) ~ b(g) * n(個)
+ * W が上記に収まる範囲で n がなかった場合には l(最小値) が INF のままになる
+ * @param[in] a 最小の重さのみかんの重さ(g)
+ * @param[in] b 最大の重さのみかんの重さ(g)
+ * @param[in] w 合計の重さ(kg)
+ * @return 取りうる最小値と最大値を含む構造体
+ */
+ANS solve(const int a,const int b,const int w){
   int W=w*1000;
   ANS ans;
   ans.l=INF;
@@ -57,11 +47,13 @@ ANS solve2(const int a,const int b,const int w){
   return ans;
 }
 
+/**
+ * ANS.l が INF だったら UNSATISFIABLE になる
+ */
 int main() {
   int a,b,w;
   scanf("%d%d%d",&a,&b,&w);
-  // solve1(a,b,w);
-  ANS ans=solve2(a,b,w);
+  ANS ans=solve(a,b,w);
   if(ans.l==INF)puts("UNSATISFIABLE");
   else printf("%d %d\n",ans.l,ans.r);
   return 0;
