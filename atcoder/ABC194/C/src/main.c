@@ -39,7 +39,7 @@ ll solve1(const int n){
   return ans;
 }
 
-void solve2(const int n) {
+ll solve2(const int n) {
   const int MAX_A=200;
   int d[401]={0};
 
@@ -50,7 +50,19 @@ void solve2(const int n) {
     }
     d[MAX_A+a[i]]+=1;
   }
-  printf("%lld\n",ans);
+  return ans;
+}
+
+ll solve3(const int n) {
+  // \sum_{i=2}^{n}
+  for(int i=2;i<=n;i+=1){
+    // \sum_{j=1}^{i-1}
+    for(int j=1;j<=i-1;j+=1){
+      int x=a[i-1]+a[j-1];
+      ans+=x*x;
+    }
+  }
+  return ans;
 }
 
 int main() {
@@ -62,7 +74,6 @@ int main() {
   }
 
   // solve1(n);
-  solve2(n);
-  printf("%lld\n",ans);
+  printf("%lld\n",solve2(n));
   return 0;
 }
