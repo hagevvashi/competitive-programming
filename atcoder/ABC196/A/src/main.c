@@ -13,5 +13,10 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int a,b,c,d;
+  scanf("%d%d",&a,&b);
+  scanf("%d%d",&c,&d);
+  int ans=max(a,b)-min(c,d);
+  printf("%d\n",ans);
   return 0;
 }
