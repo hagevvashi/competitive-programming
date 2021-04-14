@@ -14,39 +14,20 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
-  int r,x,y;
-  scanf("%d%d%d",&r,&x,&y);
-  ll glsqr=(x*x)+(y*y);
-  double gl=sqrt(glsqr);
-  ll rsqr=r*r;
+  ll r,x,y;
+  scanf("%lld%lld%lld",&r,&x,&y);
 
-  ll t;
-  if(glsqr%rsqr==0){
-    // ぴったし
-    t=glsqr/rsqr;
-    t=sqrt(t);
+  double d=hypot(x,y);
+
+  if(d==r){
+    puts("1");
   }else{
-    //puts("こっちとおるかな");
-
-    int i=1;
-    while(1){
-      /* if(r*r*i>=glsqr){ */
-      /*   break; */
-      /* } */
-      /* i+=1; */
-      if(r*i>=gl){
-        break;
-      }
-      i+=1;
+    if(d<=2*r){
+      puts("2");
+    }else{
+      printf("%d\n",(int)ceil(d/r));
     }
-
-    //    i-=1;
-
-    // t=sqrt(i);//+1;
-    t=i;
   }
-
-  printf("%lld\n",t);
 
   return 0;
 }
