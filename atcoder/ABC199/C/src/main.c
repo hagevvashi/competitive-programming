@@ -14,9 +14,12 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  char*s;
   int n;
   scanf("%d",&n);
-  char s[n*2];
+  char s1[n*2+1];
+  char s2[n*2+1];
+  s=s1;
   scanf("%s",s);
   int q;
   scanf("%d",&q);
@@ -27,24 +30,44 @@ int main() {
     scanf("%d",b+i);
   }
 
+  int flip=0;
+
   rep(i,q){
     if(t[i]==1){
       // puts(s);
-      swap(s[a[i]-1],s[b[i]-1]);
+      int c=a[i]-1;
+      int d=b[i]-1;
+      if(flip!=0){
+        if(c>=n){
+          c-=n;
+        }else{
+          c+=n;
+        }
+        if(d>=n){
+          d-=n;
+        }else{
+          d+=n;
+        }
+      }
+      swap(s[c],s[d]);
       // puts(s);
     } else {
-      if(t[i]==2){
-        // puts(s);
-        char second_half_s[n];
-        char first_half_s[n];
-        strcpy(first_half_s,s+n);
-
-        /* rep(i,n){ */
-        /*   swap(s[i],s[n+i]); */
-        /* } */
-        // puts(s);
-      }
+      // printf("flip: %d\n",flip);
+      flip=flip==0?1:0;
+      // printf("flip: %d\n",flip);
     }
+  }
+  if(flip!=0){
+    /* rep(i,n){ */
+    /*   // puts(s); */
+    /*   swap(s[i],s[n+i]); */
+    /*   // puts(s); */
+    /* } */
+
+    strcpy(s2,s+n);
+    s[n]='\0';
+    strcpy(s2+n,s);
+    s=s2;
   }
   puts(s);
   return 0;
