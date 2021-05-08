@@ -1,110 +1,105 @@
 #include <stdio.h>
-// max size of queue
-#define QL 2500
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdarg.h>
 
-short front = 0, rear = 0;
-// キュー
-short Queue[QL][2],
-  // 現在の判定座標
-  queue_x,// 列(column)インデクス
-  queue_y;// 行(raw)インデクス
+#define ll long long
+#define INF 2147483647
+#define LINF ((1LL << 62) - (1LL << 31))
+#define rep(i, n) for (int i = 0; i < n; i = i + 1)
+#define lrep(i, n) for (ll i = 0; i < n; i = i + 1)
+#define array(N, t) (t*)calloc(N, sizeof(t))
+#define max(p, q)((p) > (q) ? (p) : (q))
+#define min(p, q)((p) < (q) ? (p) : (q))
+#define swap(a, b) { int temp = a; a = b; b = temp; }
+#define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
-void push(int x, int y) {
-  Queue[rear][0] = x;
-  Queue[rear][1] = y;
-  rear += 1;
+void debug(char*s,...){
+  va_list arg;
+  printf(s,*arg);
+  puts("");
 }
 
-void pop() {
-  queue_x = Queue[front][0];
-  queue_y = Queue[front][1];
-  front += 1;
+typedef struct {
+  int front,rear,size,capacity;
+  int*array;
+} Queue;
+
+Queue*createQueue(int capacity){
+  Queue*queue=(Queue*)malloc(sizeof(Queue));
+  queue->capacity=capacity;
+  queue->front=queue->size=0;
+  queue->rear=capacity-1;
+  queue->array=(int*)malloc(queue->capacity*sizeof(int));
+  return queue;
 }
 
-int is_empty() {
-  return (front == rear);
+bool isFull(Queue*queue){
+  return (queue->size==queue->capacity);
 }
 
-short raw_count, column_count, start_raw_coordinate, start_column_coordinate, goal_raw_coordinate, goal_column_coordinate, raw_index, column_index, start_x, start_y, goal_x, goal_y;
-short moves_count_array[50][50];
-short MAX = 8192;
+bool isEmpty(Queue*queue){
+  return (queue->size==0);
+}
+
+void enqueue(Queue*queue,int item){
+  if(isFull(queue)){
+    return;
+  }
+  queue->rear=(queue->rear+1)%queue->capacity;
+  queue->array[queue->rear]=item;
+  queue->size+=1;
+  debug("%d enqueued to queue", item);
+}
+
+int dequeue(Queue*queue){
+  if(isEmpty(queue)){
+    return -INF;
+  }
+  int item=queue->array[queue->front];
+  queue->front=(queue->front+1)%queue->capacity;
+  queue->size=queue->size-1;
+  return item;
+}
+
+int front(Queue*queue){
+  if(isEmpty(queue)){
+    return -INF;
+  }
+  return queue->array[queue->front];
+}
+
+int rear(Queue*queue){
+  if(isEmpty(queue)){
+    return -INF;
+  }
+  return queue->array[queue->rear];
+}
+
+void bfs(){}
 
 int main() {
-  scanf("%hd %hd\n", &raw_count, &column_count);
-  scanf("%hd %hd\n", &start_raw_coordinate, &start_column_coordinate);
-  scanf("%hd %hd\n", &goal_raw_coordinate, &goal_column_coordinate);
+  int r,c,sy,sx,gy,gx;
+  scanf("%d%d",&r,&c);
+  scanf("%d%d",&sy,&sx);
+  scanf("%d%d",&gy,&gx);
+  char s[r][c+1];
+  rep(i,r)scanf("%s",s[i]);
 
-  // 入力値は座標なのでインデクス値に置き換える
-  start_y = start_raw_coordinate - 1;
-  start_x = start_column_coordinate - 1;
-  goal_y = goal_raw_coordinate - 1;
-  goal_x = goal_column_coordinate - 1;
+  
 
-  // マスの入力
-  for (raw_index = 0; raw_index < raw_count; ++raw_index) {
-    for (column_index = 0; column_index < column_count; ++column_index) {
-      if (getchar() == '#') {
-        // 壁は0
-        moves_count_array[column_index][raw_index] = 0;
-      } else {
-        // 通れるマスは8192
-        moves_count_array[column_index][raw_index] = MAX;
-      }
-    }
-    // for Enter
-    getchar();
-  }
+  /* Queue*queue=createQueue(1000); */
 
-  moves_count_array[start_x][start_y] = 0;
+  /* enqueue(queue,10); */
+  /* enqueue(queue,20); */
+  /* enqueue(queue,30); */
+  /* enqueue(queue,40); */
 
-  // キューにスタート地点の座標を登録
-  // 末尾インデックスの値が+1される
-  push(start_x, start_y);
+  /* debug("%d dequeued from queue\n",dequeue(queue)); */
 
-  while(!is_empty()) {
-    // キューの先頭位置に登録されている座標を現在の判定座標にセット
-    // 先頭インデックスの値が+1される
-    pop();
+  /* debug("Front item is %d", front(queue)); */
+  /* debug("Rear item is %d", rear(queue)); */
 
-    if (queue_x == goal_x && queue_y == goal_y) {
-      break;
-    }
-
-    // 現在の判定座標の左隣の座標が通れるマスかどうか判定
-    if (moves_count_array[queue_x - 1][queue_y] == MAX) {
-      // 通れるマスならそのマスの値を、現在の判定座標のマスの値+1にする
-      moves_count_array[queue_x - 1][queue_y] = moves_count_array[queue_x][queue_y] + 1;
-      // キューに現在の判定座標の左隣の座標を登録
-      // 末尾インデックスの値が+1される
-      push(queue_x - 1, queue_y);
-    }
-    // 現在の判定座標の右隣の座標が通れるマスかどうか判定
-    if (moves_count_array[queue_x + 1][queue_y] == MAX) {
-      // 通れるマスならそのマスの値を、現在の判定座標のマスの値+1にする
-      moves_count_array[queue_x + 1][queue_y] = moves_count_array[queue_x][queue_y] + 1;
-      // キューに現在の判定座標の右隣の座標を登録
-      // 末尾インデックスの値が+1される
-      push(queue_x + 1, queue_y);
-    }
-    // 現在の判定座標の上の座標が通れるマスかどうか判定
-    if (moves_count_array[queue_x][queue_y - 1] == MAX) {
-      // 通れるマスならそのマスの値を、現在の判定座標のマスの値+1にする
-      moves_count_array[queue_x][queue_y - 1] = moves_count_array[queue_x][queue_y] + 1;
-      // キューに現在の判定座標の上の座標を登録
-      // 末尾インデックスの値が+1される
-      push(queue_x, queue_y - 1);
-    }
-    // 現在の判定座標の下の座標が通れるマスかどうか判定
-    if (moves_count_array[queue_x][queue_y + 1] == MAX) {
-      // 通れるマスならそのマスの値を、現在の判定座標のマスの値+1にする
-      moves_count_array[queue_x][queue_y + 1] = moves_count_array[queue_x][queue_y] + 1;
-      // キューに現在の判定座標の下の座標を登録
-      // 末尾インデックスの値が+1される
-      push(queue_x, queue_y + 1);
-    }
-  }
-
-  printf("%d\n", moves_count_array[queue_x][queue_y]);
-
+  /* free(queue); */
   return 0;
 }
