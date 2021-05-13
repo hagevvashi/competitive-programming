@@ -17,14 +17,11 @@ int main() {
   scanf("%lld",&n);
   ll a[n];
   rep(i,n)scanf("%lld",a+i);
-  int cnt=0;
-  rep(i,n){
-    for(int j=i+1;j<n;j+=1){
-      if((a[i]-a[j])%200==0){
-        cnt+=1;
-      }
-    }
-  }
-  printf("%d\n",cnt);
+  int cnt[200];
+  rep(i,200)cnt[i]=0;
+  rep(i,n)cnt[a[i]%200]+=1;
+  ll ans=0;
+  rep(i,200)ans+=((ll)cnt[i]*(ll)(cnt[i]-1))/2;// nC2 => (n*(n-1))/2
+  printf("%lld\n",ans);
   return 0;
 }
