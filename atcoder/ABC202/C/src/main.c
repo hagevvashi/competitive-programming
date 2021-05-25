@@ -29,10 +29,19 @@ int main() {
     c[i]-=1;
   }
   ll ans=0;
-  rep(i,n)rep(j,n){
-    if(a[i]==b[c[j]]){
-      ans+=1;
-    }
+  /* rep(i,n)rep(j,n){ */
+  /*   if(a[i]==b[c[j]]){ */
+  /*     ans+=1; */
+  /*   } */
+  /* } */
+
+  int count[n];
+  rep(i,n)count[i]=0;
+  rep(j,n){
+    count[b[c[j]]]+=1;
+  }
+  rep(i,n){
+    ans+=count[a[i]];
   }
   printf("%lld\n",ans);
   return 0;
