@@ -13,5 +13,19 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int n;
+  scanf("%d",&n);
+  double m=(double)n*1.08;
+  int k=(int)m;
+  if(k<206){
+    puts("Yay!");
+  }else{
+    if(k==206){
+      puts("so-so");
+    }else{
+      puts(":(");
+    }
+  }
+
   return 0;
 }
