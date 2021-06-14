@@ -13,5 +13,17 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int n;
+  scanf("%d",&n);
+  ll sum=0;
+  ll i=0;
+  while(1){
+    i+=1;
+    sum+=i;
+    if(sum>=n){
+      break;
+    }
+  }
+  printf("%lld\n",i);
   return 0;
 }
