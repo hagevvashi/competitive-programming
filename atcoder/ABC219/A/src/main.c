@@ -13,5 +13,23 @@
 #define lswap(a, b) { ll temp = a; a = b; b = temp; }
 
 int main() {
+  int x;
+  scanf("%d",&x);
+  int ans;
+  if(x<40){
+    ans=40-x;
+  }else{
+    if(x<70){
+      ans=70-x;
+    }else{
+      if(x<90){
+        ans=90-x;
+      }else{
+        puts("expert");
+        return 0;
+      }
+    }
+  }
+  printf("%d\n",ans);
   return 0;
 }
